@@ -16,11 +16,12 @@ module ActiveRecord
         def prepare_column_options(column)
           spec = super
           spec[:unsigned] = 'true' if column.unsigned?
+          spec[:auto_increment] = 'true' if column.auto_increment?
           spec
         end
 
         def migration_keys
-          super + [:unsigned]
+          super + [:unsigned, :auto_increment]
         end
 
         private
